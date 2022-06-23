@@ -9,7 +9,7 @@ class HomePage extends StatelessWidget {
     const String name = "Keval Gadhiya";
     return Scaffold(
       appBar: AppBar(
-        title: Text("Catalog App"),
+        title: const Text("Catalog App"),
       ),
       body: const Center(
         child: Text("Welcom to $days days of Flutter by $name"),
