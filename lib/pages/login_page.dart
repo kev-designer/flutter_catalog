@@ -11,9 +11,24 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   String name = "";
   bool changeButton = false;
+
+  final _formKey = GlobalKey<FormState>();
+  moveToHome(BuildContext context) {
+    if (_formKey.currentState!.validate()) {
+      Navigator.pushNamed(
+        context,
+        MyRoutes.homeRoute,
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        shadowColor: Colors.transparent,
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
@@ -23,6 +38,7 @@ class _LoginPageState extends State<LoginPage> {
               Image.asset(
                 "assets/images/login_image.png",
                 fit: BoxFit.cover,
+                height: 300,
               ),
               const SizedBox(height: 20),
 
@@ -36,90 +52,66 @@ class _LoginPageState extends State<LoginPage> {
               ),
               const SizedBox(height: 20),
 
-              //USER NAME
-              TextFormField(
-                onChanged: (value) {
-                  name = value;
-                  setState(() {});
-                },
-                decoration: const InputDecoration(
-                  hintText: "Enter User Name",
-                  hintStyle: TextStyle(
-                    fontSize: 16,
-                  ),
-                  label: Text("User Name"),
-                ),
-              ),
-              const SizedBox(height: 20),
-
-              //PASSWORD
-              TextFormField(
-                obscureText: true,
-                decoration: const InputDecoration(
-                  hintText: "Enter Password",
-                  hintStyle: TextStyle(
-                    fontSize: 16,
-                  ),
-                  label: Text("Password"),
-                ),
-              ),
-              const SizedBox(height: 40),
-
-              // ElevatedButton(
-              //   onPressed: () {
-              //     Navigator.pushNamed(
-              //       context,
-              //       MyRoutes.homeRoute,
-              //     );
-              //   },
-              //   style: TextButton.styleFrom(
-              //     minimumSize: const Size(200, 48),
-              //   ),
-              //   child: const Text(
-              //     "Login",
-              //     style: TextStyle(
-              //       fontSize: 16,
-              //     ),
-              //   ),
-              // )
-
-              InkWell(
-                onTap: () async {
-                  setState(() {
-                    changeButton = true;
-                  });
-                  await Future.delayed(const Duration(seconds: 2));
-                  Navigator.pushNamed(
-                    context,
-                    MyRoutes.homeRoute,
-                  );
-                },
-                child: AnimatedContainer(
-                  duration: const Duration(seconds: 1),
-                  height: 50,
-                  width: changeButton == true ? 50 : 200,
-                  decoration: BoxDecoration(
-                    color:
-                        changeButton == true ? Colors.green : Colors.deepPurple,
-                    borderRadius: changeButton == true
-                        ? BorderRadius.circular(100)
-                        : BorderRadius.circular(8),
-                  ),
-                  alignment: Alignment.center,
-                  child: changeButton == true
-                      ? const Icon(
-                          Icons.done,
-                          color: Colors.white,
-                        )
-                      : const Text(
-                          "Login",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                          ),
+              //FORM
+              Form(
+                key: _formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    //USER NAME
+                    TextFormField(
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Username cannot be empty";
+                        }
+                        return null;
+                      },
+                      decoration: const InputDecoration(
+                        hintText: "Enter User Name",
+                        hintStyle: TextStyle(
+                          fontSize: 16,
                         ),
+                        label: Text("User Name"),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+
+                    //PASSWORD
+                    TextFormField(
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Password cannot be empty";
+                        } else if (value.length < 6) {
+                          return "Password lenght must be atlest 6 letter";
+                        }
+                        return null;
+                      },
+                      obscureText: true,
+                      decoration: const InputDecoration(
+                        hintText: "Enter Password",
+                        hintStyle: TextStyle(
+                          fontSize: 16,
+                        ),
+                        label: Text("Password"),
+                      ),
+                    ),
+                    const SizedBox(height: 40),
+                  ],
                 ),
               ),
+
+              ElevatedButton(
+                onPressed: () => moveToHome(context),
+                style: TextButton.styleFrom(
+                  minimumSize: const Size(200, 48),
+                ),
+                child: const Text(
+                  "Login",
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
+              )
             ],
           ),
         ),
