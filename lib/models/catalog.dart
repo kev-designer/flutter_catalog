@@ -1,44 +1,19 @@
+import 'dart:convert';
+
+
 //MODEL
 class CatalogModel {
-  static final items = [
-    Item(
-      id: 1,
-      name: "iPhone 11",
-      desc: "iPhone 11",
-      price: 999,
-      color: "#33505a",
-      imageUrl:
-          "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone11-green-select-2019_GEO_EMEA?wid=834&hei=1000&fmt=jpeg&qlt=95&.v=1567021766404",
-    ),
-    Item(
-      id: 2,
-      name: "iPhone 12",
-      desc: "iPhone 12",
-      price: 1399,
-      color: "#33505a",
-      imageUrl:
-          "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-12-red-select-2020?wid=940&hei=1112&fmt=png-alpha&.v=1604343703000",
-    ),
-    Item(
-      id: 3,
-      name: "iPhone 13",
-      desc: "iPhone 13",
-      price: 1599,
-      color: "#33505a",
-      imageUrl:
-          "https://img.kingpowerclick.com/cdn-cgi/image/format=auto/kingpower-com/image/upload/w_640,h_640/v1633576545/prod/8313327-L1.jpg",
-    ),
-  ];
+  static List<Item> items = [];
 }
 
 //DATA
 class Item {
-  final num id;
+  final int id;
   final String name;
   final String desc;
   final num price;
   final String color;
-  final String imageUrl;
+  final String image;
 
   Item({
     required this.id,
@@ -46,6 +21,83 @@ class Item {
     required this.desc,
     required this.price,
     required this.color,
-    required this.imageUrl,
+    required this.image,
   });
+
+  
+
+
+  Item copyWith({
+    int? id,
+    String? name,
+    String? desc,
+    num? price,
+    String? color,
+    String? image,
+  }) {
+    return Item(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      desc: desc ?? this.desc,
+      price: price ?? this.price,
+      color: color ?? this.color,
+      image: image ?? this.image,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    final result = <String, dynamic>{};
+  
+    result.addAll({'id': id});
+    result.addAll({'name': name});
+    result.addAll({'desc': desc});
+    result.addAll({'price': price});
+    result.addAll({'color': color});
+    result.addAll({'image': image});
+  
+    return result;
+  }
+
+  factory Item.fromMap(Map<String, dynamic> map) {
+    return Item(
+      id: map['id']?.toInt() ?? 0,
+      name: map['name'] ?? '',
+      desc: map['desc'] ?? '',
+      price: map['price'] ?? 0,
+      color: map['color'] ?? '',
+      image: map['image'] ?? '',
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory Item.fromJson(String source) => Item.fromMap(json.decode(source));
+
+  @override
+  String toString() {
+    return 'Item(id: $id, name: $name, desc: $desc, price: $price, color: $color, image: $image)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+  
+    return other is Item &&
+      other.id == id &&
+      other.name == name &&
+      other.desc == desc &&
+      other.price == price &&
+      other.color == color &&
+      other.image == image;
+  }
+
+  @override
+  int get hashCode {
+    return id.hashCode ^
+      name.hashCode ^
+      desc.hashCode ^
+      price.hashCode ^
+      color.hashCode ^
+      image.hashCode;
+  }
 }
