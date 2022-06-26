@@ -57,6 +57,7 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
+//CATALOG HEADER
 class CalatogHear extends StatelessWidget {
   const CalatogHear({Key? key}) : super(key: key);
 
@@ -66,12 +67,15 @@ class CalatogHear extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         "Catalog App".text.xl5.bold.color(MyTheme.dartBluishColor).make(),
+        10.heightBox,
         "Treanding Products".text.xl2.make(),
+        10.heightBox,
       ],
     );
   }
 }
 
+//CATALOG LIST
 class CalatogList extends StatefulWidget {
   const CalatogList({Key? key}) : super(key: key);
 
@@ -108,6 +112,7 @@ class _CalatogListState extends State<CalatogList>
   }
 }
 
+//CATALOG ITEM
 class CatalogItem extends StatelessWidget {
   final Item catalog;
   const CatalogItem(this.catalog, {Key? key}) : super(key: key);
@@ -154,6 +159,7 @@ class CatalogItem extends StatelessWidget {
   }
 }
 
+//CATALOG IMAGE
 class CatalogImage extends StatelessWidget {
   final String image;
   const CatalogImage({Key? key, required this.image}) : super(key: key);
