@@ -21,4 +21,7 @@ class MyTheme {
   static ThemeData get darkTheme => ThemeData(
         brightness: Brightness.dark,
       );
+
+  static Color creamColor = const Color(0xfff5f5f5);
+  static Color dartBluishColor = const Color(0xff403b58);
 }
