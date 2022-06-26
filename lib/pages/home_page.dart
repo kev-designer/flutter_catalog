@@ -41,15 +41,64 @@ class _HomePageState extends State<HomePage> {
         title: const Text("Catalog App"),
       ),
       body: (CatalogModel.items.isNotEmpty)
-          ? ListView.builder(
+          ? GridView.builder(
               padding: const EdgeInsets.all(20),
               itemCount: CatalogModel.items.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 16,
+                crossAxisSpacing: 16,
+              ),
               itemBuilder: (context, index) {
-                return ItemWidget(
-                  item: CatalogModel.items[index],
+                final item = CatalogModel.items[index];
+                return Card(
+                  clipBehavior: Clip.antiAlias,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: GridTile(
+                    //ITEM NAME
+                    header: Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: const BoxDecoration(
+                        color: Colors.deepPurple,
+                      ),
+                      child: Text(
+                        item.name,
+                        style: const TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+
+                    //AMOUNT
+                    footer: Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: const BoxDecoration(
+                        color: Colors.black,
+                      ),
+                      child: Text(
+                        "\$${item.price}",
+                        style: const TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+
+                    child: Image.network(item.image),
+                  ),
                 );
               },
             )
+          // ListView.builder(
+          //     padding: const EdgeInsets.all(20),
+          //     itemCount: CatalogModel.items.length,
+          //     itemBuilder: (context, index) {
+          //       return ItemWidget(
+          //         item: CatalogModel.items[index],
+          //       );
+          //     },
+          //   )
           : const Center(
               child: CircularProgressIndicator(),
             ),
