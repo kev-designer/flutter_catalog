@@ -22,7 +22,7 @@ class CartPage extends StatelessWidget {
           //DIVIDER
           Divider(
             color: context.theme.accentColor,
-            thickness: 1.0,
+            thickness: 0.9,
           ),
 
           //TOTAL VALUE CART
@@ -56,7 +56,13 @@ class _CartTotal extends StatelessWidget {
                 const StadiumBorder(),
               ),
             ),
-            onPressed: () {},
+            onPressed: () {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: "Buying not supported yet...".text.xl.make(),
+                ),
+              );
+            },
             child: "Buy".text.xl2.semiBold.make(),
           ).w32(context).h8(context),
         ],
