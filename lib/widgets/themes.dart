@@ -17,10 +17,7 @@ class MyTheme {
           iconTheme: IconThemeData(
             color: Colors.black,
           ),
-          titleTextStyle: TextStyle(
-            color: Colors.black,
-            fontSize: 18,
-          ),
+          titleTextStyle: TextStyle(color: Colors.black),
         ),
       );
 
@@ -38,10 +35,7 @@ class MyTheme {
           iconTheme: IconThemeData(
             color: Colors.white,
           ),
-          titleTextStyle: TextStyle(
-            color: Colors.black,
-            fontSize: 18,
-          ),
+          titleTextStyle: TextStyle(color: Colors.white),
         ),
       );
 
