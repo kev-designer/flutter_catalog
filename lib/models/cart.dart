@@ -1,6 +1,11 @@
 import 'package:flutter_catalog/models/catalog.dart';
 
 class CartModel {
+  static final cartModel = CartModel._iternal();
+
+  CartModel._iternal();
+  factory CartModel() => cartModel;
+  
   //CATALOG FIELD
   late CatalogModel _catalog;
 
