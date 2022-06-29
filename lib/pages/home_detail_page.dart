@@ -17,7 +17,7 @@ class HomeDetailsPage extends StatelessWidget {
         shadowColor: Colors.transparent,
         backgroundColor: Colors.transparent,
       ),
-      backgroundColor: MyTheme.creamColor,
+      backgroundColor: context.canvasColor,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -29,13 +29,13 @@ class HomeDetailsPage extends StatelessWidget {
               edge: VxEdge.TOP,
               child: Container(
                 width: context.screenWidth,
-                color: Colors.white,
+                color: context.cardColor,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     //NAME
                     catalog.name.text.xl4
-                        .color(MyTheme.dartBluishColor)
+                        .color(context.theme.accentColor)
                         .bold
                         .make(),
                     8.heightBox,
@@ -61,7 +61,7 @@ class HomeDetailsPage extends StatelessWidget {
 
       //BUTTONS
       bottomNavigationBar: Container(
-        color: Colors.white,
+        color: context.cardColor,
         child: ButtonBar(
           buttonPadding: EdgeInsets.zero,
           alignment: MainAxisAlignment.spaceBetween,
@@ -69,9 +69,8 @@ class HomeDetailsPage extends StatelessWidget {
             " \$${catalog.price}".text.xl4.bold.make(),
             ElevatedButton(
               style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(
-                  MyTheme.dartBluishColor,
-                ),
+                backgroundColor:
+                    MaterialStateProperty.all(context.theme.buttonColor),
                 shape: MaterialStateProperty.all(
                   const StadiumBorder(),
                 ),

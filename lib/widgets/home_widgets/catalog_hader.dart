@@ -11,7 +11,7 @@ class CalatogHeader extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        "Catalog App".text.xl5.bold.color(MyTheme.dartBluishColor).make(),
+        "Catalog App".text.xl5.bold.color(context.theme.accentColor).make(),
         10.heightBox,
         "Treanding Products".text.xl2.make(),
         10.heightBox,
