@@ -17,7 +17,7 @@ class CartPage extends StatelessWidget {
       backgroundColor: context.canvasColor,
       body: Column(
         children: [
-          const _CartList().p32().expand(),
+          _CartList().p32().expand(),
 
           //DIVIDER
           Divider(
@@ -34,7 +34,6 @@ class CartPage extends StatelessWidget {
 }
 
 //CARD TOTAL
-
 class _CartTotal extends StatelessWidget {
   const _CartTotal({Key? key}) : super(key: key);
 
@@ -78,15 +77,7 @@ class _CartTotal extends StatelessWidget {
 }
 
 //CART LIST
-
-class _CartList extends StatefulWidget {
-  const _CartList({Key? key}) : super(key: key);
-
-  @override
-  State<_CartList> createState() => _CartListState();
-}
-
-class _CartListState extends State<_CartList> {
+class _CartList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _cart = CartModel();
@@ -100,7 +91,7 @@ class _CartListState extends State<_CartList> {
                 trailing: IconButton(
                   onPressed: () {
                     _cart.remove(_cart.items[index]);
-                    setState(() {});
+                    // setState(() {});
                   },
                   icon: const Icon(Icons.remove_circle_outline),
                 ),
