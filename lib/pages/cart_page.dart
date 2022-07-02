@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_catalog/models/cart.dart';
-import 'package:flutter_catalog/widgets/themes.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class CartPage extends StatelessWidget {
@@ -80,24 +79,34 @@ class _CartTotal extends StatelessWidget {
 
 //CART LIST
 
-class _CartList extends StatelessWidget {
+class _CartList extends StatefulWidget {
   const _CartList({Key? key}) : super(key: key);
 
   @override
+  State<_CartList> createState() => _CartListState();
+}
+
+class _CartListState extends State<_CartList> {
+  @override
   Widget build(BuildContext context) {
     final _cart = CartModel();
-    return ListView.builder(
-      itemCount: _cart.items.length,
-      itemBuilder: (context, index) {
-        return ListTile(
-          leading: const Icon(Icons.done),
-          trailing: IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.remove_circle_outline),
-          ),
-          title: _cart.items[index].name.text.make(),
-        );
-      },
-    );
+    return _cart.items.isEmpty
+        ? "Nothing to Show".text.xl3.makeCentered()
+        : ListView.builder(
+            itemCount: _cart.items.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                leading: const Icon(Icons.done),
+                trailing: IconButton(
+                  onPressed: () {
+                    _cart.remove(_cart.items[index]);
+                    setState(() {});
+                  },
+                  icon: const Icon(Icons.remove_circle_outline),
+                ),
+                title: _cart.items[index].name.text.make(),
+              );
+            },
+          );
   }
 }
