@@ -23,11 +23,6 @@ class CartModel {
   //GET TOTAL PRICE
   num get totalPrice =>
       items.fold(0, (total, current) => total + current.price);
-
-  //REMOVE ITEM
-  void remove(Item item) {
-    _itemIds.remove(item.id);
-  }
 }
 
 //ADD ITEM
